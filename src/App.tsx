@@ -1,9 +1,16 @@
+import { ThemeProvider } from "styled-components"
+import { GlobalStyle } from "./styles/global"
+import { defaultTheme } from "./styles/theme/default"
 
 function App() {
   return (
-    <div>
-      Ignite Timer projecto 02
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <div>
+        Ignite Timer projecto 02
+      </div>
+
+      <GlobalStyle/>
+    </ThemeProvider>
   )
 }
 
