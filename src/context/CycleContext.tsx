@@ -1,5 +1,12 @@
+/* eslint-disable prettier/prettier */
 import { createContext, ReactNode, useReducer, useState } from 'react'
-import { actionTypes, Cycle, cyclesReducer } from '../reducers/cycles'
+import {
+    addNewCycleAction,
+    interruptCurrentCycleAction,
+    markCurrentCycleFinishedAction
+} from '../reducers/cycles/actions'
+
+import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
 
 interface CreateCycleData {
   task: string
@@ -45,32 +52,17 @@ export function CycleContextProvider({ children }: CycleContextProviderProps) {
       startDate: new Date(),
     }
 
-    dispatch({
-      type: actionTypes.ADD_NEW_CYCLE,
-      payload: {
-        newCycle,
-      },
-    })
+    dispatch(addNewCycleAction(newCycle))
 
     setAmountSecondsPast(0)
   }
 
   function interruptCurrentCycle() {
-    dispatch({
-      type: actionTypes.INTERRUPT_CURRENT_CYCLE,
-      payload: {
-        data: activeCycleId,
-      },
-    })
+    dispatch(interruptCurrentCycleAction())
   }
 
   function markCurrentCycleFinished() {
-    dispatch({
-      type: actionTypes.MARK_CURRENT_CYCLE_AS_FINISH,
-      payload: {
-        data: activeCycleId,
-      },
-    })
+    dispatch(markCurrentCycleFinishedAction())
   }
 
   function setSecondsPast(second: number) {
